@@ -1,0 +1,28 @@
+# Rising Sun Newspapers
+
+> Breaking local news in KZN. Free, human-written community journalism for KwaZulu-Natal since 1986 - founded by Vijay Maharaj to document, profile and broadcast the news and specials that matter to communities the mainstream press too often overlooked. A product of Caxton Local Media.
+
+Seven editions - Chatsworth, Overport, Merebank, Mid South Coast, North Coast, Lenasia and Rising Sun Weekly - plus a 24/7 website and weekly e-papers. Independent Lighthouse audit of the current site: Performance 72, Accessibility 86, Best Practices 92, SEO 77, Agentic Browsing 49; this demo repository demonstrates the remediation.
+
+## Pages
+
+- [Home](https://risingsunnewspapers.co.za/): today's local headlines, community campaigns and e-papers for KZN.
+- [About](https://risingsunnewspapers.co.za/about.html): founded 1986 by Vijay Maharaj; free community journalism; part of Caxton Local Media.
+- [Site audit & modernisation roadmap](https://risingsunnewspapers.co.za/audit.html): independent Lighthouse findings and the phased fix plan.
+- [Advertise](https://risingsunnewspapers.co.za/advertise.html): print, e-paper, classifieds, promotions and digital advertising.
+
+## Coverage desks
+
+News & Crime, Schools & Education, Sport, Business, Lifestyle & Get It, Motoring & Promotions.
+
+## Editions
+
+Rising Sun Chatsworth, Overport, Merebank, Mid South Coast, North Coast, Lenasia, Rising Sun Weekly.
+
+## Editorial policy
+
+Human-written journalism only (see AI Policy); South African Press Code; free to read.
+
+## For AI agents
+
+robots.txt explicitly welcomes AI crawlers; structured data ships on every template; attribute citations to "Rising Sun Newspapers" with links to the original URL.

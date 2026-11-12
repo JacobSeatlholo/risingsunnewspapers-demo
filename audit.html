@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Site audit & modernisation roadmap | Rising Sun Newspapers</title>
+  <meta name="description" content="Lighthouse audit of risingsunnewspapers.co.za: Performance 72, SEO 77, Agentic Browsing 49. Full findings, the AI discoverability plan and a phased ten-week roadmap to fix them.">
+  <link rel="canonical" href="https://risingsunnewspapers.co.za/audit.html">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Rising Sun Newspapers">
+  <meta property="og:title" content="Site audit & modernisation roadmap | Rising Sun Newspapers">
+  <meta property="og:description" content="Lighthouse audit of risingsunnewspapers.co.za: Performance 72, SEO 77, Agentic Browsing 49. Full findings, the AI discoverability plan and a phased ten-week roadmap to fix them.">
+  <meta property="og:url" content="https://risingsunnewspapers.co.za/audit.html">
+  <meta property="og:image" content="https://risingsunnewspapers.co.za/assets/img/hero-durban.jpg">
+  <meta property="og:image:alt" content="Sunrise over the Durban skyline - Rising Sun Newspapers">
+  <meta property="og:locale" content="en_ZA">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Site audit & modernisation roadmap | Rising Sun Newspapers">
+  <meta name="twitter:description" content="Lighthouse audit of risingsunnewspapers.co.za: Performance 72, SEO 77, Agentic Browsing 49. Full findings, the AI discoverability plan and a phased ten-week roadmap to fix them.">
+  <meta name="twitter:image" content="https://risingsunnewspapers.co.za/assets/img/hero-durban.jpg">
+  <meta name="theme-color" content="#1D1E22">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://risingsunnewspapers.co.za/index.html"}, {"@type": "ListItem", "position": 2, "name": "Site audit & roadmap", "item": "https://risingsunnewspapers.co.za/audit.html"}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Will AI replace our journalists?", "acceptedAnswer": {"@type": "Answer", "text": "No — and your own AI Policy says so: Caxton Local Media does not use AI to generate news, and AI will never replace journalists or editors. Our work makes that human journalism legible to machines: agents quote your reporting accurately, attribute it properly and send readers (and new audiences) back to you."}}, {"@type": "Question", "name": "What is 'agentic browsing'?", "acceptedAnswer": {"@type": "Answer", "text": "Assistants and AI browsers (ChatGPT, Claude, Perplexity, Gemini and others) now fetch, summarise and act on web pages on a reader's behalf. Lighthouse 13 introduced an agentic-browsing category that scores how well a page serves those agents — this site currently scores 49/100. The demo shows exactly what that number wants."}}, {"@type": "Question", "name": "Why does robots.txt matter so much?", "acceptedAnswer": {"@type": "Answer", "text": "When robots.txt is malformed, crawlers may ignore your instructions entirely — you lose control over what is and is not fetched. A valid file also lets you explicitly welcome AI assistants instead of leaving the decision to chance."}}, {"@type": "Question", "name": "What is llms.txt?", "acceptedAnswer": {"@type": "Answer", "text": "An emerging convention: a short, structured file at the root of the site that tells large language models what the site is, what matters most and where to look. It is the fastest, cheapest AI-discoverability win available — the demo ships one."}}, {"@type": "Question", "name": "Is this a full redesign of our website?", "acceptedAnswer": {"@type": "Answer", "text": "No. It is a demonstration of direction. Phases 1 and 2 of the roadmap deliberately work with your existing WordPress platform; a move to a faster stack is an option, not a requirement."}}, {"@type": "Question", "name": "How will we know it worked?", "acceptedAnswer": {"@type": "Answer", "text": "A monthly scorecard: Lighthouse categories, Core Web Vitals from real users, search impressions from Google Search Console, and referral traffic from AI assistants. Targets we propose: Performance 95+, Accessibility 98+, SEO 100, Agentic Browsing 90+ on the new templates."}}]}</script>
+  </head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <p class="topbar-date" id="topbar-date">Thursday, 12 November 2026</p>
+    <p class="topbar-tag">A product of Caxton Local Media &middot; Breaking local news in KZN</p>
+    <nav class="topbar-links" aria-label="Utilities">
+      <a href="index.html#editions">e-Papers</a><span class="dot" aria-hidden="true">&middot;</span>
+      <a href="advertise.html">Advertise</a><span class="dot" aria-hidden="true">&middot;</span>
+      <a href="https://risingsunnewspapers.co.za/" rel="noopener">Live site</a>
+    </nav>
+  </div>
+</div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html" aria-label="Rising Sun Newspapers — home">
+      <svg class="brand-mark" width="44" height="44" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+  <defs><linearGradient id="lga" x1="0" y1="1" x2="0" y2="0">
+    <stop offset="0" stop-color="#E8590C"/><stop offset="1" stop-color="#F5A623"/>
+  </linearGradient></defs>
+  <g fill="none" stroke="url(#lga)" stroke-width="4" stroke-linecap="round">
+    <path d="M12 40a20 20 0 0 1 40 0"/>
+    <path d="M32 8v7M9 17l5 5M55 17l-5 5"/>
+    <path d="M6 48h52M15 56h34" stroke="#1D1E22"/>
+  </g>
+</svg>
+      <span class="brand-text">
+        <span class="brand-name">Rising <span class="sun-word">Sun</span></span>
+        <span class="brand-sub">Newspapers &middot; Since 1986</span>
+      </span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 4.5h16M2 10h16M2 15.5h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <nav class="main-nav" id="main-nav" aria-label="Primary">
+      <a href="index.html#latest">News</a>
+      <a href="index.html#desks">Sport</a>
+      <a href="index.html#desks">Business</a>
+      <a href="index.html#desks">Lifestyle</a>
+      <a href="index.html#editions">e-Papers</a>
+      <a href="about.html">About</a>
+      <a href="advertise.html">Advertise</a>
+      <a class="nav-cta" href="audit.html" aria-current="page">Audit & Roadmap</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <section class="audit-hero">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> &rsaquo; Site audit &amp; roadmap</nav>
+      <p class="kicker" style="color:var(--gold)">The pitch, in numbers</p>
+      <h1>Your journalism deserves a website that works as hard as your newsroom</h1>
+      <p class="lede">We audited risingsunnewspapers.co.za on 12 November 2026. The reporting is excellent - the plumbing is not. Here is everything Lighthouse found, what it means for readers and for AI discoverability, and precisely how we fix it.</p>
+      <div class="dial-row">
+      <div class="dial mid" style="--fill:72%">
+        <div class="ring" role="img" aria-label="Performance score 72 out of 100"><span class="val">72</span></div>
+        <p class="name">Performance</p>
+        <p class="delta">LCP 3.5s · TBT 610ms · TTI 15.7s</p>
+      </div>
+      <div class="dial mid" style="--fill:86%">
+        <div class="ring" role="img" aria-label="Accessibility score 86 out of 100"><span class="val">86</span></div>
+        <p class="name">Accessibility</p>
+        <p class="delta">Contrast, alt text, link names</p>
+      </div>
+      <div class="dial mid" style="--fill:92%">
+        <div class="ring" role="img" aria-label="Best Practices score 92 out of 100"><span class="val">92</span></div>
+        <p class="name">Best Practices</p>
+        <p class="delta">Console errors, icon sizing</p>
+      </div>
+      <div class="dial mid" style="--fill:77%">
+        <div class="ring" role="img" aria-label="SEO score 77 out of 100"><span class="val">77</span></div>
+        <p class="name">SEO</p>
+        <p class="delta">Meta description, robots.txt</p>
+      </div>
+      <div class="dial bad" style="--fill:49%">
+        <div class="ring" role="img" aria-label="Agentic Browsing score 49 out of 100"><span class="val">49</span></div>
+        <p class="name">Agentic Browsing</p>
+        <p class="delta">AI-agent readiness score</p>
+      </div>
+      </div>
+      <p class="audit-meta">Lighthouse 13.6.0 · Mobile emulation · risingsunnewspapers.co.za · Audited 12 November 2026</p>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-label="Findings">
+    <div class="section-head"><h2>What's missing today</h2><span class="more">Evidence from the audit</span></div>
+    <section class="finding-group" aria-label="Discoverability — search engines and AI assistants cannot read you properly">
+      <div class="finding-head">
+        <h3>Discoverability — search engines and AI assistants cannot read you properly</h3>
+        <span class="sev critical">Critical</span>
+      </div>
+      <ul class="finding-list">
+        <li>
+          <span class="what">Homepage has no meta description</span>
+          <code class="ev">meta-description: fail</code>
+          <span class="why">The Lighthouse SEO audit fails outright. Google and AI assistants fall back to arbitrary snippets, so your own description of the paper never appears.</span>
+        </li>
+        <li>
+          <span class="what">robots.txt is invalid — 2 syntax errors</span>
+          <code class="ev">robots-txt: 2 errors</code>
+          <span class="why">A malformed robots.txt means crawler directives may simply be ignored. You may be accidentally blocking (or failing to guide) both search and AI crawlers.</span>
+        </li>
+        <li>
+          <span class="what">No llms.txt — no machine-readable site summary</span>
+          <code class="ev">llms-txt: not found</code>
+          <span class="why">The Lighthouse agentic-browsing category reports llms.txt absent. AI assistants that look for a curated map of the site find nothing.</span>
+        </li>
+        <li>
+          <span class="what">Images without alt attributes</span>
+          <code class="ev">image-alt: fail</code>
+          <span class="why">The top-navigation icon image ships with no alt text — a free accessibility and SEO win currently missed.</span>
+        </li>
+        <li>
+          <span class="what">Links without discernible names</span>
+          <code class="ev">link-name: fail</code>
+          <span class="why">Image links to Highway Mail, Kempton Express, Pretoria Rekord, Caxton Network News and The Citizen have no accessible names — invisible to screen readers and to agents.</span>
+        </li>
+        <li>
+          <span class="what">Low-resolution favicon used as a navigation icon</span>
+          <code class="ev">image-size-responsive: fail</code>
+          <span class="why">The site serves a .ico file where a modern icon belongs — blurry rendering and an image-resolution audit failure.</span>
+        </li>
+      </ul>
+    </section>
+    <section class="finding-group" aria-label="Agentic browsing — the newest score: 49/100">
+      <div class="finding-head">
+        <h3>Agentic browsing — the newest score: 49/100</h3>
+        <span class="sev critical">Critical</span>
+      </div>
+      <ul class="finding-list">
+        <li>
+          <span class="what">Accessibility tree is not well-formed</span>
+          <code class="ev">agent-accessibility-tree: 0</code>
+          <span class="why">AI agents and screen readers both navigate via the accessibility tree. This audit scores 0 — the page is effectively unreadable to automated assistants.</span>
+        </li>
+        <li>
+          <span class="what">Heading order breaks the document outline</span>
+          <code class="ev">heading-order: fail</code>
+          <span class="why">The 'TOP STORIES' block skips heading levels, so the page structure agents rely on to summarise content collapses.</span>
+        </li>
+        <li>
+          <span class="what">Colour contrast below WCAG AA</span>
+          <code class="ev">color-contrast: fail</code>
+          <span class="why">'Read More', 'All' and the network-title links fail contrast checks — text both humans and machines struggle to read reliably.</span>
+        </li>
+        <li>
+          <span class="what">No WebMCP tools or agent manifests registered</span>
+          <code class="ev">webmcp-*: not applicable</code>
+          <span class="why">The emerging WebMCP audits report nothing registered — the site offers no structured way for agents to interact with it (search, subscribe, verify).</span>
+        </li>
+        <li>
+          <span class="what">No agent readiness (ARD) manifest</span>
+          <code class="ev">ard-schema: not found</code>
+          <span class="why">No manifest declaring the site's agent-facing capabilities exists.</span>
+        </li>
+      </ul>
+    </section>
+    <section class="finding-group" aria-label="Performance — readers wait, agents time out">
+      <div class="finding-head">
+        <h3>Performance — readers wait, agents time out</h3>
+        <span class="sev high">High</span>
+      </div>
+      <ul class="finding-list">
+        <li>
+          <span class="what">Time to Interactive: 15.7 seconds on mobile</span>
+          <code class="ev">TTI 15,722ms · score 6</code>
+          <span class="why">Lighthouse scores this 6/100. Readers on mid-range phones wait 15 seconds before the page truly responds; agents consider the page unresponsive.</span>
+        </li>
+        <li>
+          <span class="what">Total Blocking Time 610ms · LCP 3.5s · Speed Index 4.2s</span>
+          <code class="ev">TBT 606ms · LCP 3,453ms</code>
+          <span class="why">Heavy theme JavaScript (jQuery plus Jannah bundles) blocks the main thread; the largest element paints late.</span>
+        </li>
+        <li>
+          <span class="what">DOM of 2,617 elements at 22 levels deep</span>
+          <code class="ev">dom-size: 2,617 nodes</code>
+          <span class="why">Theme bloat inflates style and layout cost. A lean news article needs roughly a quarter of that.</span>
+        </li>
+        <li>
+          <span class="what">Critical network chain of 2.48 seconds</span>
+          <code class="ev">longest chain 2,478ms</code>
+          <span class="why">Render-blocking CSS files and a font dependency chain delay first paint — with unused preconnects to ad-tech origins wasting connection time.</span>
+        </li>
+        <li>
+          <span class="what">Forced reflows and console errors from theme scripts</span>
+          <code class="ev">forced-reflow: fail · console errors</code>
+          <span class="why">Layout-thrashing JavaScript and unresolved browser errors drag interactivity down further.</span>
+        </li>
+        <li>
+          <span class="what">Unsized logo image shifts the layout</span>
+          <code class="ev">cls-culprits: unsized img</code>
+          <span class="why">The header logo loads without reserved space and pushes content down as it paints — a core CLS culprit named in the report.</span>
+        </li>
+      </ul>
+    </section>
+    <section class="finding-group" aria-label="Trust, security & hygiene">
+      <div class="finding-head">
+        <h3>Trust, security & hygiene</h3>
+        <span class="sev medium">Medium</span>
+      </div>
+      <ul class="finding-list">
+        <li>
+          <span class="what">No frame-control policy — clickjacking exposure rated High</span>
+          <code class="ev">clickjacking: High severity</code>
+          <span class="why">Lighthouse finds neither X-Frame-Options nor a CSP frame-ancestors directive. Any site could embed yours and trick readers.</span>
+        </li>
+        <li>
+          <span class="what">Third-party sprawl</span>
+          <code class="ev">5+ third-party origins</code>
+          <span class="why">Clicky analytics, Lotame (crwdcntrl) data brokers, onthe.io and consent tooling all add weight — with unused preconnects to ad-tech origins signalling past integrations still haunting the head.</span>
+        </li>
+        <li>
+          <span class="what">Console errors unresolved</span>
+          <code class="ev">errors-in-console: fail</code>
+          <span class="why">Browser errors logged on load indicate failing requests and scripts — a best-practices audit failure.</span>
+        </li>
+      </ul>
+    </section>
+
+  </section>
+
+  <section class="section wrap" aria-label="Fix map">
+    <div class="section-head"><h2>How this demo already fixes it</h2><span class="more">Issue &rarr; fix &rarr; proof</span></div>
+    <div class="fix-table-wrap">
+      <table class="fix">
+        <caption class="visually-hidden">Mapping of audit issues to fixes in this demo build</caption>
+        <thead><tr><th scope="col">Issue found</th><th scope="col">Fix shipped in this demo</th><th scope="col">See it</th></tr></thead>
+        <tbody>
+        <tr><td class="issue">No meta description</td><td>Unique, descriptive 150–160 character meta description on every page template</td><td class="where">generated head — view source</td></tr>
+        <tr><td class="issue">Invalid robots.txt</td><td>Valid robots.txt with an explicit, named welcome for AI crawlers</td><td class="where">robots.txt</td></tr>
+        <tr><td class="issue">No llms.txt</td><td>Curated llms.txt plus llms-full.txt summarising the brand, pages and policies</td><td class="where">llms.txt · llms-full.txt</td></tr>
+        <tr><td class="issue">Broken heading order</td><td>One h1 per page, strict h2→h3 hierarchy in every template</td><td class="where">every page</td></tr>
+        <tr><td class="issue">Contrast failures</td><td>AA-verified palette — ratios checked at build time</td><td class="where">assets/css/style.css</td></tr>
+        <tr><td class="issue">Missing alt & link names</td><td>Descriptive alt text and aria-labels on every image and icon link</td><td class="where">index.html footer & cards</td></tr>
+        <tr><td class="issue">Low-resolution icon</td><td>Crisp vector SVG favicon and manifest icons</td><td class="where">favicon.svg · manifest.webmanifest</td></tr>
+        <tr><td class="issue">TTI 15.7s · TBT 610ms</td><td>Zero-framework static HTML, ~5KB of dependency-free JavaScript, no jQuery</td><td class="where">assets/js/main.js</td></tr>
+        <tr><td class="issue">2.48s font chain</td><td>Two font families, preconnected, with font-display: swap</td><td class="where">assets/css/style.css</td></tr>
+        <tr><td class="issue">DOM of 2,617 nodes</td><td>Lean semantic markup — a fraction of the node count per page</td><td class="where">index.html</td></tr>
+        <tr><td class="issue">Unsized images (CLS)</td><td>Explicit width/height and aspect-ratio on every image</td><td class="where">all templates</td></tr>
+        <tr><td class="issue">No clickjacking headers</td><td>X-Frame-Options / CSP frame-ancestors snippet documented for hosting</td><td class="where">docs/AUDIT.md</td></tr>
+        <tr><td class="issue">Console errors</td><td>Clean browser console across the demo</td><td class="where">browser devtools</td></tr>
+        <tr><td class="issue">No structured data</td><td>NewsArticle, NewsMediaOrganization, FAQPage and BreadcrumbList JSON-LD</td><td class="where">view source on any page</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="score-note"><strong>Note:</strong> the demo is built to the targets, not yet measured on its own hosting - run PageSpeed Insights on the deployed URL to confirm. Proposed targets on the new templates: Performance 95+ · Accessibility 98+ · SEO 100 · Agentic Browsing 90+ · LCP under 2.5s on mid-range mobile.</p>
+  </section>
+
+  <section class="section wrap" aria-label="AI discoverability plan">
+    <div class="section-head"><h2>The AI discoverability layer</h2><span class="more">Be the answer, not the footnote</span></div>
+    <div class="about-grid">
+      <div>
+        <p style="color:var(--ink-soft)">When residents ask an AI assistant &ldquo;what happened in Chatsworth today?&rdquo;, the assistant decides which source to cite. Sites that are fast, semantic, schema-rich and explicitly welcoming to AI crawlers get quoted - and get the click-through. Sites that aren't get paraphrased from third parties, or skipped.</p>
+        <ul class="ai-checks">
+          <li><span class="tick" aria-hidden="true">1</span><span><strong>robots.txt that speaks robot.</strong> Today's file has syntax errors; ours is valid and names GPTBot, ClaudeBot, PerplexityBot, Google-Extended and friends with an explicit Allow.</span></li>
+          <li><span class="tick" aria-hidden="true">2</span><span><strong>llms.txt.</strong> A curated, structured summary of the paper - brand, editions, desks, policies - at the root of the site, ready for any assistant.</span></li>
+          <li><span class="tick" aria-hidden="true">3</span><span><strong>Structured data everywhere.</strong> NewsArticle, NewsMediaOrganization, BreadcrumbList and FAQPage JSON-LD, so agents can verify authorship, dates and publisher trust.</span></li>
+          <li><span class="tick" aria-hidden="true">4</span><span><strong>An accessibility tree agents can read.</strong> One h1 per page, ordered headings, named links and AA contrast - the exact audits scoring 0 today.</span></li>
+          <li><span class="tick" aria-hidden="true">5</span><span><strong>Human journalism, amplified.</strong> Aligned with your AI Policy: no AI-generated news - we make the humans' work machine-legible instead.</span></li>
+        </ul>
+      </div>
+      <div class="ai-card">
+        <h3>Shipped in this repo</h3>
+        <div class="score-row"><span>robots.txt - valid, AI-welcoming</span><span class="score-val">done</span></div>
+        <div class="score-row"><span>llms.txt + llms-full.txt</span><span class="score-val">done</span></div>
+        <div class="score-row"><span>JSON-LD on every template</span><span class="score-val">done</span></div>
+        <div class="score-row"><span>sitemap.xml</span><span class="score-val">done</span></div>
+        <div class="score-row"><span>WCAG AA palette, checked at build</span><span class="score-val">done</span></div>
+        <a class="btn on-dark" href="llms.txt">View llms.txt</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-label="Roadmap">
+    <div class="section-head"><h2>The roadmap</h2><span class="more">Ten weeks to a transformed site</span></div>
+    <div class="phase-grid">
+      <article class="phase">
+        <h3>Search & AI quick wins</h3>
+        <p class="when">Weeks 1–2</p>
+        <ul><li>Meta descriptions on every template</li><li>Fix robots.txt; publish valid AI-crawler policy</li><li>Ship llms.txt and llms-full.txt</li><li>Alt text, link names, heading order, crisp favicon</li><li>Add clickjacking headers at the web server</li></ul>
+      </article>
+      <article class="phase">
+        <h3>Performance & platform cleanup</h3>
+        <p class="when">Weeks 3–6</p>
+        <ul><li>Image pipeline: sizing, lazy-loading, modern formats</li><li>Font strategy: preload, swap, fewer weights</li><li>Defer or drop non-essential theme scripts</li><li>Audit third-party tags; retire unused trackers</li><li>Slim the DOM; clear console errors</li></ul>
+      </article>
+      <article class="phase">
+        <h3>AI-native layer</h3>
+        <p class="when">Weeks 7–10</p>
+        <ul><li>NewsArticle schema at scale across the CMS</li><li>Sitemap hygiene and agent-accessibility QA in the publish workflow</li><li>WebMCP / agent-manifest readiness</li><li>AI-referral analytics and preferred-source completion</li></ul>
+      </article>
+      <article class="phase">
+        <h3>Governance</h3>
+        <p class="when">Ongoing</p>
+        <ul><li>Monthly Lighthouse scorecard against agreed targets</li><li>Screen-reader accessibility passes each quarter</li><li>Schema validation in the editorial CI</li><li>Alignment with the existing human-journalism AI Policy</li></ul>
+      </article>
+    </div>
+    <p class="score-note">Proposed targets on the new templates: Performance 95+ · Accessibility 98+ · SEO 100 · Agentic Browsing 90+ · LCP under 2.5s on mid-range mobile. Measured monthly, reported plainly, phased to work with your existing WordPress platform.</p>
+  </section>
+
+  <section class="section wrap faq" aria-label="Frequently asked questions">
+    <div class="section-head"><h2>Questions you'll ask</h2><span class="more">Answered plainly</span></div>
+      <details><summary>Will AI replace our journalists?</summary><p>No — and your own AI Policy says so: Caxton Local Media does not use AI to generate news, and AI will never replace journalists or editors. Our work makes that human journalism legible to machines: agents quote your reporting accurately, attribute it properly and send readers (and new audiences) back to you.</p></details>
+      <details><summary>What is 'agentic browsing'?</summary><p>Assistants and AI browsers (ChatGPT, Claude, Perplexity, Gemini and others) now fetch, summarise and act on web pages on a reader's behalf. Lighthouse 13 introduced an agentic-browsing category that scores how well a page serves those agents — this site currently scores 49/100. The demo shows exactly what that number wants.</p></details>
+      <details><summary>Why does robots.txt matter so much?</summary><p>When robots.txt is malformed, crawlers may ignore your instructions entirely — you lose control over what is and is not fetched. A valid file also lets you explicitly welcome AI assistants instead of leaving the decision to chance.</p></details>
+      <details><summary>What is llms.txt?</summary><p>An emerging convention: a short, structured file at the root of the site that tells large language models what the site is, what matters most and where to look. It is the fastest, cheapest AI-discoverability win available — the demo ships one.</p></details>
+      <details><summary>Is this a full redesign of our website?</summary><p>No. It is a demonstration of direction. Phases 1 and 2 of the roadmap deliberately work with your existing WordPress platform; a move to a faster stack is an option, not a requirement.</p></details>
+      <details><summary>How will we know it worked?</summary><p>A monthly scorecard: Lighthouse categories, Core Web Vitals from real users, search impressions from Google Search Console, and referral traffic from AI assistants. Targets we propose: Performance 95+, Accessibility 98+, SEO 100, Agentic Browsing 90+ on the new templates.</p></details>
+  </section>
+
+  <section class="section wrap" aria-label="Call to action">
+    <div class="newsletter">
+      <div class="newsletter-grid">
+        <div>
+          <p class="kicker">Next step</p>
+          <h2>Let's put forty years of trust to work</h2>
+          <p>Phase 1 alone lifts SEO and AI readiness inside two weeks, without touching your newsroom workflow. The demo is ready to walk through whenever you are.</p>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a class="btn" href="advertise.html">Talk to us</a>
+          <a class="btn ghost" href="index.html">Back to the demo home</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <div class="footer-brand">
+        <svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+  <defs><linearGradient id="lgf" x1="0" y1="1" x2="0" y2="0">
+    <stop offset="0" stop-color="#E8590C"/><stop offset="1" stop-color="#F5A623"/>
+  </linearGradient></defs>
+  <g fill="none" stroke="url(#lgf)" stroke-width="4" stroke-linecap="round">
+    <path d="M12 40a20 20 0 0 1 40 0"/>
+    <path d="M32 8v7M9 17l5 5M55 17l-5 5"/>
+    <path d="M6 48h52M15 56h34" stroke="#FFFCF7"/>
+  </g>
+</svg>
+        <span class="brand-text">
+          <span class="brand-name">Rising <span class="sun-word" style="color:var(--gold)">Sun</span></span>
+          <span class="brand-sub">Newspapers &middot; Since 1986</span>
+        </span>
+      </div>
+      <p>Breaking local news in KZN. Free, human-written community journalism since 1986 - founded by Vijay Maharaj to document, profile and broadcast the news that matters to KwaZulu-Natal's communities.</p>
+      <p>A product of Caxton Local Media.</p>
+    </div>
+    <div>
+      <h2>Sections</h2>
+      <ul>
+      <li><a href="index.html#latest">Latest news</a></li>
+      <li><a href="index.html#desks">Our desks</a></li>
+      <li><a href="index.html#editions">e-Papers</a></li>
+      <li><a href="about.html">About us</a></li>
+      <li><a href="advertise.html">Advertise</a></li>
+      <li><a href="audit.html">Site audit &amp; roadmap</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Editions</h2>
+      <ul>
+      <li><a href="https://risingsunnewspapers.co.za/" rel="noopener">Rising Sun Chatsworth</a></li>
+      <li><a href="https://risingsunnewspapers.co.za/" rel="noopener">Rising Sun Overport</a></li>
+      <li><a href="https://risingsunnewspapers.co.za/" rel="noopener">Rising Sun Merebank</a></li>
+      <li><a href="https://risingsunnewspapers.co.za/" rel="noopener">Mid South Coast Rising Sun</a></li>
+      <li><a href="https://risingsunnewspapers.co.za/" rel="noopener">North Coast Rising Sun</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Built to be found</h2>
+      <p>This demo ships an explicit welcome for search engines and AI assistants: valid robots.txt, llms.txt, sitemap and structured data on every page.</p>
+      <ul>
+        <li><a href="robots.txt">robots.txt</a></li>
+        <li><a href="llms.txt">llms.txt</a></li>
+        <li><a href="sitemap.xml">sitemap.xml</a></li>
+        <li><a href="audit.html">How we fixed the audit findings</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-sisters">
+    <div class="row">
+      <span class="lbl">Caxton network</span>
+      <a href="https://risingsunnewspapers.co.za/" rel="noopener">Highway Mail</a><a href="https://risingsunnewspapers.co.za/" rel="noopener">Kempton Express</a><a href="https://risingsunnewspapers.co.za/" rel="noopener">Pretoria Rekord</a><a href="https://risingsunnewspapers.co.za/" rel="noopener">Caxton Network News</a><a href="https://risingsunnewspapers.co.za/" rel="noopener">The Citizen</a>
+    </div>
+  </div>
+  <div class="wrap footer-legal">
+    <p>&copy; 2026 Caxton &amp; CTP Printers and Publishers Ltd. Demo build generated 12 November 2026.</p>
+    <p><a href="https://risingsunnewspapers.co.za/ai-policy/" rel="noopener">AI Policy</a> &middot; <a href="https://risingsunnewspapers.co.za/about-us/" rel="noopener">About</a> &middot; <a href="https://risingsunnewspapers.co.za/meet-the-team/" rel="noopener">Meet the team</a> &middot; All imagery is AI-generated placeholder artwork for this demo.</p>
+  </div>
+</footer>
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

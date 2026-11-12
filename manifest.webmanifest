@@ -1,0 +1,13 @@
+{
+  "name": "Rising Sun Newspapers",
+  "short_name": "Rising Sun",
+  "description": "Breaking local news in KwaZulu-Natal. Free community journalism since 1986.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FFFCF7",
+  "theme_color": "#1D1E22",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
