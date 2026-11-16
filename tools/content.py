@@ -1,16 +1,33 @@
 #!/usr/bin/env python3
 """Content data for the Rising Sun Newspapers demo build.
 
-Sources:
-- Headlines, editions and organisation facts: risingsunnewspapers.co.za (fetched 12 Nov 2026)
-- Audit findings: Lighthouse 13.6.0 report supplied by the client (12 Nov 2026, mobile)
-All copy is demo/illustrative except where a fact is quoted from the sources above.
+REAL FACTS in this file were taken from risingsunnewspapers.co.za on
+16 November 2026:
+- Masthead logo: the site's own header file (230x110.jpg, images.caxton.co.za)
+- Headlines, bylines, dates, article openings and photos: the live articles
+- Print runs, distribution days and coverage areas: the live About page
+- Social handles, sister titles, copyright line: the live homepage
+Audit findings come from the Lighthouse 13.6.0 report supplied by the client
+(12 November 2026, mobile). The newsletter name is the only demo suggestion.
 """
 
 SITE_URL = "https://risingsunnewspapers.co.za"
 BRAND = "Rising Sun Newspapers"
 TAGLINE = "Breaking local news in KZN"
 FOUNDED = 1986
+
+LOGO_IMG = "rising-sun-logo.jpg"
+LIVE_LOGO_URL = "https://images.caxton.co.za/wp-content/uploads/sites/107/2025/09/230x110.jpg"
+DEFAULT_OG = ("https://risingsunnewspapers.co.za/wp-content/uploads/sites/107/2026/11/"
+              "Jobless-youth-question-eThekwinis-unemployment-decrease-copy-scaled.jpg")
+
+SOCIALS = [
+    ("Facebook", "https://www.facebook.com/risingsunnewspapers"),
+    ("X", "https://x.com/risingsunonline"),
+    ("Instagram", "https://www.instagram.com/risingsunonline"),
+    ("TikTok", "https://www.tiktok.com/@risingsuncommunity"),
+    ("YouTube", "https://www.youtube.com/channel/UC1uBILF0SLydRgUYJqFMRTA"),
+]
 
 NAV = [
     ("News", "index.html#latest", None),
@@ -27,61 +44,94 @@ HEADLINES = [
     {
         "kicker": "News",
         "title": "Jobless youth question eThekwini's unemployment decrease",
+        "standfirst": "eThekwini's official unemployment rate fell from 27.8% to 22.2% between Q3 2025 and Q3 2026. Young residents are asking where those jobs actually are.",
         "author": "Sibahle Anthony Siqathule",
         "author_role": "Rising Sun reporter",
         "date": "12 November 2026",
         "date_iso": "2026-11-12",
         "slug": "article-jobless-youth.html",
-        "img": "hero-durban",
-        "alt": "Golden sunrise over the Durban city skyline and Indian Ocean (illustrative demo image)",
+        "img": "article-jobless",
+        "w": 2560, "h": 1707,
+        "alt": "Photo accompanying the Rising Sun report on youth unemployment in eThekwini (photo: Rising Sun Newspapers)",
         "flag": "Latest",
+        "live_url": "https://risingsunnewspapers.co.za/331684/jobless-youth-question-ethekwinis-unemployment-decrease/",
+        "og": DEFAULT_OG,
     },
     {
         "kicker": "Community",
         "title": "A seat at the Christmas table: TAFTA launches annual campaign with support from special guest, Mariam Bassa",
-        "author": "Rising Sun Newsroom",
+        "author": "Rising Sun Online",
         "author_role": "Community desk",
         "date": "11 November 2026",
         "date_iso": "2026-11-11",
         "slug": "article-christmas-table.html",
-        "img": "lifestyle",
-        "alt": "Volunteers serving meals at long communal tables during a charity event (illustrative demo image)",
+        "img": "article-tafta",
+        "w": 2560, "h": 1700,
+        "alt": "Actress Mariam Bassa with TAFTA resident Ivan Ronald during her visit (photo: Rising Sun Newspapers)",
         "flag": None,
+        "live_url": "https://risingsunnewspapers.co.za/331653/a-seat-at-the-christmas-table-tafta-launches-annual-campaign-with-support-from-special-guest-mariam-bassa/",
+        "og": "https://risingsunnewspapers.co.za/wp-content/uploads/sites/107/2026/11/TAFTA-scaled.jpg",
     },
     {
-        "kicker": "Education",
-        "title": "Orient Islamic School innovators put water conservation in the spotlight at robotics competition",
-        "author": "Rising Sun Newsroom",
-        "author_role": "Schools desk",
+        "kicker": "Heritage",
+        "title": "MEECA to hold candlelight ceremony in honour of Indian indentured labourers",
+        "author": "Keroshan Govender",
+        "author_role": "Rising Sun reporter",
         "date": "11 November 2026",
         "date_iso": "2026-11-11",
-        "slug": "article-christmas-table.html",
-        "img": "education",
-        "alt": "High school learners building a robotics project in a classroom (illustrative demo image)",
+        "slug": "article-meeca.html",
+        "img": "article-meeca",
+        "w": 2551, "h": 1599,
+        "alt": "Members of MEECA at the historic Mount Edgecombe Sugar Mill Chimney Site (photo: Rising Sun Newspapers)",
         "flag": None,
+        "live_url": "https://risingsunnewspapers.co.za/331600/meeca-to-hold-candlelight-ceremony-in-honour-of-indian-indentured-labourers/",
+        "og": "https://risingsunnewspapers.co.za/wp-content/uploads/sites/107/2026/11/MEECA-to-hold-candlelight-ceremony-in-honour-of-Indian-indentured-labourers-PIC-1.jpg",
     },
 ]
 
+# Real headlines still on the live site; each row links to the original story.
 MORE_ROWS = [
     {
         "kicker": "Crime & Courts",
         "title": "Father sentenced to life imprisonment for raping his teenage daughter",
         "date": "11 November 2026",
-        "slug": "article-jobless-youth.html",
+        "ext": "https://risingsunnewspapers.co.za/331647/father-sentenced-to-life-imprisonment-for-raping-his-teenage-daughter/",
     },
     {
         "kicker": "Crime & Courts",
         "title": "Man killed, another injured in Montford shooting",
-        "date": "11 November 2026",
-        "slug": "article-jobless-youth.html",
+        "date": "",
+        "ext": "https://risingsunnewspapers.co.za/331674/man-killed-another-injured-in-montford-shooting/",
+    },
+    {
+        "kicker": "Education",
+        "title": "Orient Islamic School innovators put water conservation in the spotlight at robotics competition",
+        "date": "",
+        "ext": "https://risingsunnewspapers.co.za/331644/orient-islamic-school-innovators-put-water-conservation-in-the-spotlight-at-robotics-competition/",
+    },
+    {
+        "kicker": "Sport",
+        "title": "KFC Mini Cricket inspires the next generation of Phoenix cricketers",
+        "date": "",
+        "ext": "https://risingsunnewspapers.co.za/331111/kfc-mini-cricket-inspires-the-next-generation-of-phoenix-cricketers/",
+    },
+    {
+        "kicker": "Business",
+        "title": "KZN SMME owners graduate from Regent Business School and Standard Bank development programme",
+        "date": "",
+        "ext": "https://risingsunnewspapers.co.za/331616/kwazulu-natal-smme-owners-graduate-from-regent-business-school-and-standard-bank-development-programme/",
     },
 ]
 
+# (text, href) - sample pages in this demo, real stories on the live site.
 TICKER = [
-    "Jobless youth question eThekwini's unemployment decrease",
-    "TAFTA launches annual Christmas table campaign",
-    "Orient Islamic School innovators shine at robotics competition",
-    "New e-Papers: Chatsworth, Overport, Merebank and more",
+    ("Jobless youth question eThekwini's unemployment decrease", "article-jobless-youth.html"),
+    ("TAFTA launches annual Christmas Lunch Appeal with Mariam Bassa", "article-christmas-table.html"),
+    ("MEECA candlelight ceremony marks 166 years since the SS Truro", "article-meeca.html"),
+    ("Orient Islamic learners shine at national robotics competition",
+     "https://risingsunnewspapers.co.za/331644/orient-islamic-school-innovators-put-water-conservation-in-the-spotlight-at-robotics-competition/"),
+    ("A helping hand and a hearty meal bring Diwali cheer to Westcliff",
+     "https://risingsunnewspapers.co.za/331623/a-helping-hand-and-a-hearty-meal-bring-diwali-cheer-to-westcliff/"),
 ]
 
 DESKS = [
@@ -95,23 +145,47 @@ DESKS = [
 
 STATS = [
     ("40", "Years serving KZN", "Family-founded in 1986"),
-    ("7", "Community editions", "Print titles plus weekly e-papers"),
-    ("100%", "Free to read", "Accessible community journalism"),
+    ("213,500+", "Copies a week", "Published runs across five editions"),
+    ("6", "Community editions", "Plus weekly e-papers and a Shoppers Guide"),
+    ("100%", "Free to read", "Accessible community journalism, no paywall"),
     ("100%", "Human journalism", "No AI-generated news, by policy"),
 ]
 
+# Homepage edition cards: (name, real distribution fact from the About page).
 EDITIONS = [
-    ("Rising Sun Chatsworth", "Latest e-paper: 10 November 2026"),
-    ("Rising Sun Overport", "Latest e-paper: 12 November 2026"),
-    ("Rising Sun Merebank", "Latest e-paper: 10 November 2026"),
-    ("Mid South Coast Rising Sun", "Latest e-paper: 10 November 2026"),
-    ("North Coast Rising Sun", "Latest e-paper: 11 November 2026"),
-    ("Rising Sun Lenasia", "Latest e-paper: 10 November 2026"),
-    ("Rising Sun Weekly", "Weekly edition"),
-    ("Rising Sun Shoppers Guide", "Seasonal specials guide"),
+    ("Rising Sun Chatsworth", "53,500 copies distributed every Tuesday"),
+    ("North Coast Rising Sun", "65,000 copies - incorporating Phoenix, Cornubia, Tongaat, Verulam & Ottawa"),
+    ("Rising Sun Overport", "45,000 copies distributed every Thursday"),
+    ("Rising Sun Lenasia", "30,000 copies distributed every Tuesday"),
+    ("Rising Sun Merebank", "20,000 copies distributed every Tuesday"),
+    ("Mid-South Coast Rising Sun", "Out Tuesdays, from Umzinto to Ifafa"),
 ]
 
-SISTERS = ["Highway Mail", "Kempton Express", "Pretoria Rekord", "Caxton Network News", "The Citizen"]
+# Advertise page table: (edition, published print run, day, coverage sample).
+EDITION_RUNS = [
+    ("Rising Sun Chatsworth", "53,500", "Tuesdays",
+     "Arena Park, Bayview, Croftdene, Silverglen, Mobeni Heights, Kharwastan, Umhlatuzana, Shallcross, Montford, Havenside, Woodhurst, Westcliff, Crossmoor, Moorton, Malvern, Hilary, Buffelsbosch"),
+    ("North Coast Rising Sun", "65,000", "Wednesdays",
+     "Incorporating Phoenix, Cornubia, Tongaat, Verulam & Ottawa; Shastri Park, Palmview, Stanmore, Sunford, Greenbury, Mount Edgecombe and more"),
+    ("Rising Sun Overport", "45,000", "Thursdays",
+     "Asherville, Cato Manor, Clare Estate, Newlands East & West, Overport, Parlock, Reservoir Hills, Sea Cow Lake, Sydenham, Sherwood, Durban CBD, Springfield Park, Avoca and more"),
+    ("Rising Sun Lenasia", "30,000", "Tuesdays",
+     "Lenasia, Lenasia South, Zakariyya Park, Roshnee, Azaardville, Ennerdale, Migson Manor, Dadaville, De Deur, Bush Kopies, Nancefield"),
+    ("Rising Sun Merebank", "20,000", "Tuesdays",
+     "Wentworth, Merewent, Jacobs, Clairwood, Isipingo, Lotus Park, Merebank Central, South Coast Road, Prospecton and more"),
+    ("Mid-South Coast Rising Sun", "Print run not published", "Tuesdays",
+     "Umzinto, Shayamoya, Esperanza/Sezala, Park Rynie, Scottburgh, Freeland Park, Umkomaas, Pennington, Malangeni/Dududu, Amahlonga, Ifafa"),
+]
+
+# Sister titles named on the live homepage's network bar.
+SISTERS = ["The Citizen", "The Witness", "Zululand Observer", "Benoni City Times",
+           "Pretoria Rekord", "Sedibeng Ster", "Highvelder News", "Highway Mail"]
+
+# Real history from the live About page.
+HISTORY = [
+    "In 1986, there was a dire need for an affordable newspaper within the Indian community. This prompted Vijay Maharaj, CEO of The Rising Sun Newspapers, to launch a free newspaper to document, profile and broadcast the latest news and advertising specials.",
+    "When the founder and CEO of the Rising Sun Community Newspapers decided to launch a newspaper in 1986, he did so with the intention of providing communities with free access to news and advertisements. Three and a half decades later, the influential newspaper has become more than just a source of news and advertising: it serves as the mirror and voice of communities and is a trusted advertising platform for businesses.",
+]
 
 # ---------------------------------------------------------------- audit data
 AUDIT_META = "Lighthouse 13.6.0 · Mobile emulation · risingsunnewspapers.co.za · Audited 12 November 2026"
@@ -278,67 +352,100 @@ ARTICLES = {
     "article-jobless-youth": {
         "kicker": "News",
         "title": "Jobless youth question eThekwini's unemployment decrease",
-        "standfirst": "Young residents say the lived reality on the ground tells a different story than the latest positive numbers.",
-        "author": "Rising Sun Newsroom",
-        "initials": "RS",
+        "standfirst": "eThekwini's official unemployment rate fell from 27.8% to 22.2% between Q3 2025 and Q3 2026. Young residents are asking where those jobs actually are.",
+        "author": "Sibahle Anthony Siqathule",
+        "initials": "SS",
+        "author_bio": "Sibahle Anthony Siqathule reports for the Rising Sun.",
         "date": "12 November 2026",
         "date_iso": "2026-11-12",
         "reading": "4 min read",
-        "img": "hero-durban",
-        "alt": "Golden sunrise over the Durban city skyline and Indian Ocean (illustrative demo image)",
-        "caption": "Illustrative demo image — final template carries the newsroom's own photography and captions.",
-        "body_demo_note": "This sample article demonstrates the new article template. The headline reflects genuine recent coverage on risingsunnewspapers.co.za, where the story was reported by Rising Sun journalist Sibahle Anthony Siqathule. The body text below is illustrative placeholder copy written for this demo.",
+        "img": "article-jobless",
+        "w": 2560, "h": 1707,
+        "alt": "Photo accompanying the Rising Sun report on youth unemployment in eThekwini (photo: Rising Sun Newspapers)",
+        "caption": "Photo: Rising Sun Newspapers / risingsunnewspapers.co.za",
+        "live_url": "https://risingsunnewspapers.co.za/331684/jobless-youth-question-ethekwinis-unemployment-decrease/",
+        "og": DEFAULT_OG,
+        "body_demo_note": "Real coverage, condensed: this sample page republishes the opening facts of the story reported for the Rising Sun by Sibahle Anthony Siqathule on 12 November 2026, in the new article template. The full report lives on the live site.",
         "sections": [
-            ("h2", "When the numbers and the street disagree"),
-            ("p_first", "A positive headline about falling unemployment should have been good news for eThekwini's young people. Instead, it has become the latest flashpoint between official statistics and the day-to-day reality of job-seeking in communities like Chatsworth, Merebank and Montford."),
-            ("p", "On the ground, the questions come quickly: which jobs were counted, where are they, and who got them? For households where one income supports several people, the gap between a percentage point and a payslip is the whole story."),
-            ("p", "Youth unemployment has been one of the defining challenges facing South Africa's metros for more than a decade. When a municipality reports improvement, residents naturally want to see the evidence in their own neighbourhoods - in vacancy lists, in learnership intakes, in the queue outside the local employment office."),
-            ("h2", "What young residents say they want"),
-            ("p", "In conversations reflected in Rising Sun's coverage, the same themes keep returning:"),
-            ("ul", [
-                "Visibility - knowing which opportunities actually exist, and where to apply",
-                "Transport - getting to an interview should not cost a day's wage",
-                "Skills - short courses and learnerships that end in real contracts",
-                "Local first - municipal jobs and procurement that look to nearby communities",
-            ]),
-            ("p", "Each of these sits within the reach of local government, business and community organisations working together - which is precisely why readers keep holding the numbers to account."),
-            ("h2", "Why local journalism matters here"),
-            ("p", "National headlines move on within a news cycle. A community newspaper stays: it attends the community meetings, asks the ward councillors, and returns to the same young people a month later to ask what changed. That continuity is what turns a statistic back into a story."),
-            ("p", "Read the original reporting and ongoing coverage on the live site."),
+            ("h2", "The numbers, and the reaction"),
+            ("p_first", "The announcement that eThekwini's official unemployment rate dropped from 27.8% to 22.2% between the third quarter of 2025 and the third quarter of 2026 has been met with mixed reactions."),
+            ("p", "For some, the figures represent welcome progress. For others, they are a distant reflection of a reality characterised by unanswered job applications, financial hardship and qualifications that do not open doors."),
+            ("p", "That gap - between a percentage point on a slide and a payslip in a household - is exactly the ground a community newspaper covers: the ward meetings, the job queues, the learnership intakes, the young people asking what changed."),
+            ("h2", "Read the original report"),
+            ("p", "The full story, reported and written for the Rising Sun by Sibahle Anthony Siqathule, is on the live site - alongside the paper's ongoing coverage of youth unemployment across eThekwini."),
+            ("also", ("14 months on and still no justice for father killed on Phoenix Highway",
+                      "https://risingsunnewspapers.co.za/331617/14-months-on-and-still-no-justice-for-father-killed-on-phoenix-highway/")),
         ],
-        "related": ["article-christmas-table", "TAFTA campaign", "More community coverage"],
+        "related": [
+            ("Community", "TAFTA launches annual Christmas Lunch Appeal", "article-christmas-table.html"),
+            ("Heritage", "MEECA candlelight ceremony honours indentured labourers", "article-meeca.html"),
+        ],
         "ld_type": "NewsArticle",
     },
     "article-christmas-table": {
         "kicker": "Community",
         "title": "A seat at the Christmas table: TAFTA launches annual campaign with support from special guest, Mariam Bassa",
-        "standfirst": "The season of giving returns as the long-standing Durban organisation caring for older persons invites the community to pull up a chair.",
-        "author": "Rising Sun Newsroom",
+        "standfirst": "The Association for the Aged launches its annual Christmas Lunch Appeal, with support from South African actress Mariam Bassa.",
+        "author": "Rising Sun Online",
         "initials": "RS",
+        "author_bio": "Stories from the Rising Sun's online desk.",
         "date": "11 November 2026",
         "date_iso": "2026-11-11",
-        "reading": "3 min read",
-        "img": "lifestyle",
-        "alt": "Volunteers serving meals at long communal tables during a charity event (illustrative demo image)",
-        "caption": "Illustrative demo image — final template carries the newsroom's own photography and captions.",
-        "body_demo_note": "This sample article demonstrates the new article template. The headline reflects genuine recent coverage on risingsunnewspapers.co.za. The body text below is illustrative placeholder copy written for this demo.",
+        "reading": "2 min read",
+        "img": "article-tafta",
+        "w": 2560, "h": 1700,
+        "alt": "Actress Mariam Bassa with TAFTA resident Ivan Ronald during her visit (photo: Rising Sun Newspapers)",
+        "caption": "Mariam Bassa with TAFTA resident Ivan Ronald during her visit. Photo: Rising Sun Newspapers",
+        "live_url": "https://risingsunnewspapers.co.za/331653/a-seat-at-the-christmas-table-tafta-launches-annual-campaign-with-support-from-special-guest-mariam-bassa/",
+        "og": "https://risingsunnewspapers.co.za/wp-content/uploads/sites/107/2026/11/TAFTA-scaled.jpg",
+        "body_demo_note": "Real coverage, condensed: this sample page republishes the opening facts of the story published by Rising Sun Online on 11 November 2026, in the new article template. The full report lives on the live site.",
         "sections": [
-            ("h2", "A table that holds a whole community"),
-            ("p_first", "For many older residents, the festive season can be the loneliest time of the year - and the easiest time for the rest of us to change that. TAFTA, the Durban organisation with a long history of caring for older persons, has launched its annual Christmas table campaign for 2026, with support from special guest Mariam Bassa."),
-            ("p", "The idea behind the campaign is as warm as it is practical: no resident of a TAFTA home should spend Christmas Day without a full table, familiar faces and the feeling of a community that remembers them."),
-            ("blockquote", "A seat at the table is a small thing to give, and an enormous thing to receive."),
+            ("h2", "The appeal"),
+            ("p_first", "TAFTA (The Association for the Aged) has launched its annual Christmas Lunch Appeal, with support from South African actress Mariam Bassa, best known for her role as Aya Kandasamy."),
+            ("p", "During her visit, Bassa met residents and staff - photographed here with TAFTA resident Ivan Ronald - and spoke about what a festive gathering can mean for older persons: the chance to let their hair down, enjoy themselves and feel the warmth of the community around them."),
+            ("p", "Bassa also praised the dedication of TAFTA's staff, highlighting the care, humour and friendships that help create a welcoming environment for older persons."),
             ("h2", "How the community can help"),
-            ("p", "Campaigns like this one succeed because local people treat them as their own. Typical ways to take part include:"),
-            ("ul", [
-                "Donating festive groceries or sponsoring a table for a home",
-                "Volunteering time on the day - serving, singing, simply sitting with residents",
-                "Spreading the word through family WhatsApp groups and community pages",
-            ]),
-            ("p", "Readers who want the full details of this year's campaign - including how to donate - will find the complete story and contact information in the live coverage on the Rising Sun website."),
+            ("p", "Appeals like this one succeed because local people treat them as their own - donating festive groceries, sponsoring tables, volunteering on the day, and spreading the word through family WhatsApp groups and community pages."),
+            ("p", "The full details of this year's campaign, including how to donate, are in the original story on the live site."),
             ("h2", "The paper behind the campaign"),
-            ("p", "Stories like this one are why community newspapers exist. Nobody else is going to spend the second week of November in a retirement home dining hall, taking down names and asking what Christmas means to the people seated there. The Rising Sun does - and has, for forty years."),
+            ("p", "Stories like this are why community newspapers exist. Nobody else spends the second week of November in a retirement home dining hall, taking down names and asking what Christmas means to the people seated there. The Rising Sun does - and has, for forty years."),
         ],
-        "related": ["article-jobless-youth", "eThekwini youth story", "More local news"],
+        "related": [
+            ("Heritage", "MEECA candlelight ceremony honours indentured labourers", "article-meeca.html"),
+            ("News", "Jobless youth question eThekwini's unemployment decrease", "article-jobless-youth.html"),
+        ],
+        "ld_type": "NewsArticle",
+    },
+    "article-meeca": {
+        "kicker": "Heritage",
+        "title": "MEECA to hold candlelight ceremony in honour of Indian indentured labourers",
+        "standfirst": "The ceremony marks 166 years since the first Indian indentured labourers arrived in Natal aboard the SS Truro on 16 November 1860.",
+        "author": "Keroshan Govender",
+        "initials": "KG",
+        "author_bio": "Keroshan Govender reports for the Rising Sun.",
+        "date": "11 November 2026",
+        "date_iso": "2026-11-11",
+        "reading": "2 min read",
+        "img": "article-meeca",
+        "w": 2551, "h": 1599,
+        "alt": "Members of MEECA at the historic Mount Edgecombe Sugar Mill Chimney Site (photo: Rising Sun Newspapers)",
+        "caption": "Members of MEECA at the historic Mount Edgecombe Sugar Mill Chimney Site. Photo: Rising Sun Newspapers",
+        "live_url": "https://risingsunnewspapers.co.za/331600/meeca-to-hold-candlelight-ceremony-in-honour-of-indian-indentured-labourers/",
+        "og": "https://risingsunnewspapers.co.za/wp-content/uploads/sites/107/2026/11/MEECA-to-hold-candlelight-ceremony-in-honour-of-Indian-indentured-labourers-PIC-1.jpg",
+        "body_demo_note": "Real coverage, condensed: this sample page republishes the opening facts of the story reported by Keroshan Govender, published 11 November 2026, in the new article template. The full report lives on the live site.",
+        "sections": [
+            ("h2", "166 years since the SS Truro"),
+            ("p_first", "The ceremony marks 166 years since the first Indian indentured labourers arrived in Natal aboard the SS Truro on 16 November 1860."),
+            ("p", "Members of MEECA gathered at the historic Mount Edgecombe Sugar Mill Chimney Site - a structure the organisation is seeking to adopt and preserve, so that future generations can learn about the men, women and children whose lives were shaped by indenture, and whose labour built the local sugar industry."),
+            ("blockquote", "\u201cToday, we stand on the shoulders of these courageous pioneers. Their hard work, perseverance, faith, and sacrifice laid the foundations upon which many families and communities\u2026\u201d - from MEECA's address, quoted in the original report"),
+            ("h2", "Why this story matters here"),
+            ("p", "For forty years this paper has served the very communities whose forebears arrived on those ships. Reporting on commemorations like this one is not nostalgia journalism: it is the record of where those communities come from, kept in print and online for the generations who now read it on their phones."),
+            ("p", "The full story, reported by Keroshan Govender, is on the live site."),
+        ],
+        "related": [
+            ("Community", "TAFTA launches annual Christmas Lunch Appeal", "article-christmas-table.html"),
+            ("News", "Jobless youth question eThekwini's unemployment decrease", "article-jobless-youth.html"),
+        ],
         "ld_type": "NewsArticle",
     },
 }

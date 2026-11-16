@@ -1,5 +1,5 @@
 # Rising Sun Newspapers - demo build
-# Generated 12 November 2026. Production file ships at the site root.
+# Generated 16 November 2026. Production file ships at the site root.
 
 User-agent: *
 Allow: /

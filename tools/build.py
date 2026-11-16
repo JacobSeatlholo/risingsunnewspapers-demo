@@ -14,8 +14,9 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from content import (  # noqa: E402
     BRAND, TAGLINE, SITE_URL, FOUNDED, NAV, NAV_CTA, HEADLINES, MORE_ROWS,
-    TICKER, DESKS, STATS, EDITIONS, SISTERS, AUDIT_META, SCORES, FINDINGS,
-    FIXMAP, PHASES, FAQ, TARGETS, ARTICLES,
+    TICKER, DESKS, STATS, EDITIONS, EDITION_RUNS, SISTERS, AUDIT_META, SCORES,
+    FINDINGS, FIXMAP, PHASES, FAQ, TARGETS, ARTICLES, HISTORY,
+    LOGO_IMG, LIVE_LOGO_URL, DEFAULT_OG, SOCIALS,
 )
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -90,8 +91,13 @@ def logo(uid="a"):
     return LOGO_SVG.replace("{uid}", uid)
 
 
-def head(title, desc, path, ld_blocks=None, ld_faq=None, page_hero_img=True):
-    og = SITE_URL + "/assets/img/hero-durban.jpg"
+def ext_attrs(url):
+    """Attributes for links that open the live site in a new tab."""
+    return ' target="_blank" rel="noopener"' if url.startswith("http") else ""
+
+
+def head(title, desc, path, ld_blocks=None, ld_faq=None, og_img=None):
+    og = og_img or DEFAULT_OG
     url = SITE_URL + ("/" if path == "index.html" else "/" + path)
     ld = [ld_org(), ld_website()] if ld_blocks is None else ld_blocks
     blocks = "".join(f'<script type="application/ld+json">{json.dumps(b, ensure_ascii=False)}</script>\n  ' for b in ld)
@@ -109,7 +115,7 @@ def head(title, desc, path, ld_blocks=None, ld_faq=None, page_hero_img=True):
   <meta property="og:description" content="{desc}">
   <meta property="og:url" content="{url}">
   <meta property="og:image" content="{og}">
-  <meta property="og:image:alt" content="Sunrise over the Durban skyline - Rising Sun Newspapers">
+  <meta property="og:image:alt" content="Rising Sun Newspapers - Breaking local news in KZN">
   <meta property="og:locale" content="en_ZA">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{title}">
@@ -131,11 +137,12 @@ def ld_org():
         "@type": "NewsMediaOrganization",
         "name": BRAND,
         "url": SITE_URL,
-        "logo": SITE_URL + "/favicon.svg",
+        "logo": {"@type": "ImageObject", "url": LIVE_LOGO_URL},
         "slogan": TAGLINE,
         "foundingDate": str(FOUNDED),
         "founder": {"@type": "Person", "name": "Vijay Maharaj"},
         "parentOrganization": {"@type": "Organization", "name": "Caxton & CTP Printers and Publishers Ltd"},
+        "sameAs": [u for _, u in SOCIALS],
         "isAccessibleForFree": True,
         "publishingPrinciples": AI_POLICY_URL,
         "knowsLanguage": ["en", "zu", "ta", "hi"],
@@ -171,7 +178,7 @@ def breadcrumb(items):
 def topbar():
     return f"""<div class="topbar">
   <div class="wrap topbar-inner">
-    <p class="topbar-date" id="topbar-date">Thursday, 12 November 2026</p>
+    <p class="topbar-date" id="topbar-date">{BUILD_DATE}</p>
     <p class="topbar-tag">A product of Caxton Local Media &middot; {TAGLINE}</p>
     <nav class="topbar-links" aria-label="Utilities">
       <a href="index.html#editions">e-Papers</a><span class="dot" aria-hidden="true">&middot;</span>
@@ -193,11 +200,7 @@ def header(active):
     return f"""<header class="site-header">
   <div class="wrap header-inner">
     <a class="brand" href="index.html" aria-label="{BRAND} — home">
-      {logo()}
-      <span class="brand-text">
-        <span class="brand-name">Rising <span class="sun-word">Sun</span></span>
-        <span class="brand-sub">Newspapers &middot; Since {FOUNDED}</span>
-      </span>
+      <img class="brand-logo" src="assets/img/{LOGO_IMG}" alt="{BRAND} — Community Newspapers" width="230" height="110" fetchpriority="high" decoding="async">
     </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu">
       <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 4.5h16M2 10h16M2 15.5h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -211,12 +214,12 @@ def header(active):
 
 def ticker():
     items = "".join(
-        f'<a href="{h["slug"]}">{TICKER[i]}</a><span class="sep" aria-hidden="true">/</span>'
-        for i, h in enumerate(HEADLINES)
+        f'<a href="{h}"{ext_attrs(t)}>{t}</a><span class="sep" aria-hidden="true">/</span>'
+        for t, h in TICKER
     )
     dup = "".join(
-        f'<a href="{h["slug"]}" tabindex="-1" aria-hidden="true">{TICKER[i]}</a><span class="sep" aria-hidden="true">/</span>'
-        for i, h in enumerate(HEADLINES)
+        f'<a href="{h}" tabindex="-1" aria-hidden="true"{ext_attrs(t)}>{t}</a><span class="sep" aria-hidden="true">/</span>'
+        for t, h in TICKER
     )
     return f"""<div class="ticker" aria-label="Latest headlines">
   <div class="ticker-inner">
@@ -235,8 +238,12 @@ def footer():
                          ("e-Papers", "index.html#editions"), ("About us", "about.html"),
                          ("Advertise", "advertise.html"), ("Site audit &amp; roadmap", "audit.html")]
     )
-    eds = "".join(f'      <li><a href="{LIVE_URL}" rel="noopener">{n}</a></li>\n' for n, _ in EDITIONS[:5])
+    eds = "".join(f'      <li><a href="{LIVE_URL}epapers/" rel="noopener">{n}</a></li>\n' for n, _ in EDITIONS)
     sisters = "".join(f'<a href="{LIVE_URL}" rel="noopener">{s}</a>' for s in SISTERS)
+    socials = "".join(
+        f'<a href="{u}" rel="noopener" aria-label="{BRAND} on {n}">{n}</a><span class="dot" aria-hidden="true">&middot;</span>'
+        for n, u in SOCIALS
+    )
     return f"""<footer class="site-footer">
   <div class="wrap footer-grid">
     <div>
@@ -249,6 +256,7 @@ def footer():
       </div>
       <p>{TAGLINE}. Free, human-written community journalism since {FOUNDED} - founded by Vijay Maharaj to document, profile and broadcast the news that matters to KwaZulu-Natal's communities.</p>
       <p>A product of Caxton Local Media.</p>
+      <p class="footer-social">{socials}</p>
     </div>
     <div>
       <h2>Sections</h2>
@@ -279,17 +287,17 @@ def footer():
   </div>
   <div class="wrap footer-legal">
     <p>&copy; {TODAY.year} Caxton &amp; CTP Printers and Publishers Ltd. Demo build generated {BUILD_DATE}.</p>
-    <p><a href="{AI_POLICY_URL}" rel="noopener">AI Policy</a> &middot; <a href="{LIVE_URL}about-us/" rel="noopener">About</a> &middot; <a href="{LIVE_URL}meet-the-team/" rel="noopener">Meet the team</a> &middot; All imagery is AI-generated placeholder artwork for this demo.</p>
+    <p><a href="{AI_POLICY_URL}" rel="noopener">AI Policy</a> &middot; <a href="{LIVE_URL}about-rising-sun-newspapers/" rel="noopener">About</a> &middot; <a href="{LIVE_URL}meet-the-team/" rel="noopener">Meet the team</a> &middot; Article photography &copy; Rising Sun Newspapers; other imagery is illustrative demo artwork.</p>
   </div>
 </footer>"""
 
 
-def shell(title, desc, path, body, ld_blocks=None, ld_faq=None, active=None, progress=False):
+def shell(title, desc, path, body, ld_blocks=None, ld_faq=None, active=None, progress=False, og_img=None):
     bar = '<div id="read-progress" aria-hidden="true" style="position:fixed;top:0;left:0;height:3px;width:0;background:var(--grad-sunrise);z-index:160;"></div>' if progress else ""
     return f"""<!DOCTYPE html>
 <html lang="en-ZA">
 <head>
-{head(title, desc, path, ld_blocks, ld_faq)}</head>
+{head(title, desc, path, ld_blocks, ld_faq, og_img)}</head>
 <body>
 {bar}
   <a class="skip-link" href="#main">Skip to content</a>
@@ -309,7 +317,7 @@ def build_index():
     side_html = ""
     for h in HEADLINES[1:]:
         side_html += f"""      <article class="side-card">
-        <a href="{h['slug']}"><img src="assets/img/{h['img']}.jpg" alt="{h['alt']}" width="132" height="132" loading="lazy" decoding="async"></a>
+        <a href="{h['slug']}"><img src="assets/img/{h['img']}.jpg" alt="{h['alt']}" width="{h['w']}" height="{h['h']}" loading="lazy" decoding="async"></a>
         <div>
           <p class="kicker">{h['kicker']}</p>
           <h2><a href="{h['slug']}">{h['title']}</a></h2>
@@ -320,7 +328,7 @@ def build_index():
     cards = ""
     for h in HEADLINES:
         cards += f"""      <article class="card">
-        <a class="card-media" href="{h['slug']}" tabindex="-1" aria-hidden="true"><img src="assets/img/{h['img']}.jpg" alt="{h['alt']}" width="640" height="360" loading="lazy" decoding="async"></a>
+        <a class="card-media" href="{h['slug']}" tabindex="-1" aria-hidden="true"><img src="assets/img/{h['img']}.jpg" alt="{h['alt']}" width="{h['w']}" height="{h['h']}" loading="lazy" decoding="async"></a>
         <p class="kicker">{h['kicker']}</p>
         <h3><a href="{h['slug']}">{h['title']}</a></h3>
         <p class="meta"><strong>{h['author']}</strong><span class="sep">|</span>{h['date']}</p>
@@ -328,7 +336,10 @@ def build_index():
 """
     rows = ""
     for r in MORE_ROWS:
-        rows += f"""      <div class="row"><span><span class="kicker">{r['kicker']}</span> &nbsp;<a href="{r['slug']}">{r['title']}</a></span><time datetime="{r['date']}">{r['date']}</time></div>\n"""
+        tgt, attrs = r.get("ext"), ""
+        if tgt:
+            attrs = ' target="_blank" rel="noopener"'
+        rows += f"""      <div class="row"><span><span class="kicker">{r['kicker']}</span> &nbsp;<a href="{tgt}"{attrs}>{r['title']}{'' if not tgt else '<span class="visually-hidden"> — opens the original story on risingsunnewspapers.co.za</span>'}</a></span><time datetime="{r['date']}">{r['date']}</time></div>\n"""
     desks = "".join(f"""      <article class="desk"><h3>{n}</h3><p>{d}</p></article>\n""" for n, d in DESKS)
     stats = "".join(f"""      <div class="stat"><p class="num">{n}</p><p class="lbl">{l}</p><p class="sub">{s}</p></div>\n""" for n, l, s in STATS)
     eds = "".join(f"""      <article class="edition">
@@ -345,12 +356,12 @@ def build_index():
     <div class="hero-grid">
       <article class="lead-card">
         <div class="lead-media">
-          <img src="assets/img/{lead['img']}.jpg" alt="{lead['alt']}" width="1344" height="768" fetchpriority="high" decoding="async">
+          <img src="assets/img/{lead['img']}.jpg" alt="{lead['alt']}" width="{lead['w']}" height="{lead['h']}" fetchpriority="high" decoding="async">
           <span class="flag">Top story</span>
         </div>
         <p class="kicker">{lead['kicker']}</p>
         <h1><a href="{lead['slug']}">{lead['title']}</a></h1>
-        <p class="standfirst">Young residents say the lived reality on the ground tells a different story than the latest positive numbers.</p>
+        <p class="standfirst">{lead['standfirst']}</p>
         <p class="meta"><strong>{lead['author']}</strong><span class="sep">|</span>{lead['date']}<span class="sep">|</span>{lead['author_role']}</p>
       </article>
       <div class="hero-side" aria-label="More top stories">
@@ -364,7 +375,7 @@ def build_index():
 {cards}    </div>
     <div class="card-list" style="margin-top:26px">
 {rows}    </div>
-    <p class="demo-note" style="margin-top:22px"><strong>Demo content note:</strong> headlines above reflect genuine recent coverage on risingsunnewspapers.co.za; sample article pages demonstrate the new template with illustrative copy.</p>
+    <p class="demo-note" style="margin-top:22px"><strong>Demo content note:</strong> every headline, byline and photograph above is genuine coverage from risingsunnewspapers.co.za (November 2026). The sample article pages carry condensed real excerpts and link to the original stories; "More coverage" rows open the live articles directly.</p>
   </section>
 
   <section class="section wrap" id="desks" aria-label="Our desks">
@@ -453,6 +464,9 @@ def build_article(key):
             secs += f'        <blockquote><p>{val}</p></blockquote>\n'
         elif kind == "ul":
             secs += "        <ul>\n" + "".join(f'          <li>{li}</li>\n' for li in val) + "        </ul>\n"
+        elif kind == "also":
+            t, u = val
+            secs += f'        <p class="also-read"><strong>Also read:</strong> <a href="{u}" target="_blank" rel="noopener">{t}<span class="visually-hidden"> — opens the original story on risingsunnewspapers.co.za</span></a></p>\n'
     share_url = SITE_URL + "/" + key + ".html"
     share = f"""    <div class="share-row">
       <span class="lbl">Share</span>
@@ -463,22 +477,20 @@ def build_article(key):
     </div>"""
     related = "".join(
         f'        <li><span class="k">{k}</span><a href="{u}">{t}</a></li>\n'
-        for k, t, u in [("Related", a["related"][1] + " sample", key + ".html"),
-                        ("Next", a["related"][2] + " sample", "index.html#latest"),
-                        ("Live", "All coverage on risingsunnewspapers.co.za", LIVE_URL)]
-    )
+        for k, t, u in a["related"]
+    ) + f'        <li><span class="k">Live</span><a href="{a["live_url"]}" target="_blank" rel="noopener">Read the original story<span class="visually-hidden"> — opens risingsunnewspapers.co.za</span></a></li>\n'
     ld_article = {
         "@context": "https://schema.org",
         "@type": a["ld_type"],
         "headline": a["title"],
         "description": a["standfirst"],
-        "image": SITE_URL + f"/assets/img/{a['img']}.jpg",
+        "image": a["og"],
         "datePublished": a["date_iso"],
         "dateModified": a["date_iso"],
         "inLanguage": "en-ZA",
         "isAccessibleForFree": True,
-        "author": {"@type": "Organization", "name": "Rising Sun Newsroom"},
-        "publisher": {"@type": "NewsMediaOrganization", "name": BRAND, "logo": {"@type": "ImageObject", "url": SITE_URL + "/favicon.svg"}},
+        "author": {"@type": "Person", "name": a["author"]},
+        "publisher": {"@type": "NewsMediaOrganization", "name": BRAND, "logo": {"@type": "ImageObject", "url": LIVE_LOGO_URL}},
         "mainEntityOfPage": share_url,
     }
     crumbs = [("Home", "index.html"), (a["kicker"], "index.html#latest")]
@@ -499,17 +511,18 @@ def build_article(key):
       </div>
       <p class="demo-note"><strong>Demo layout:</strong> {a['body_demo_note']}</p>
       <figure class="article-media">
-        <img src="assets/img/{a['img']}.jpg" alt="{a['alt']}" width="1344" height="768" fetchpriority="high" decoding="async">
+        <img src="assets/img/{a['img']}.jpg" alt="{a['alt']}" width="{a['w']}" height="{a['h']}" fetchpriority="high" decoding="async">
         <figcaption>{a['caption']}</figcaption>
       </figure>
       <div class="prose">
 {secs}      </div>
+      <p style="margin-top:18px"><a class="btn ghost" href="{a['live_url']}" target="_blank" rel="noopener">Read the original report on risingsunnewspapers.co.za</a></p>
 {share}
       <div class="author-box">
-        <span class="avatar" aria-hidden="true">RS</span>
+        <span class="avatar" aria-hidden="true">{a['initials']}</span>
         <div>
-          <h3>Rising Sun Newsroom</h3>
-          <p>Reporting for KwaZulu-Natal's communities since {FOUNDED}. This demo article page shows the structure every story would get: clean headings, schema markup, share actions and related reading.</p>
+          <h3>{a['author']}</h3>
+          <p>{a['author_bio']} This demo article page shows the structure every story would get: clean headings, schema markup, share actions and related reading.</p>
         </div>
       </div>
     </article>
@@ -539,7 +552,8 @@ def build_article(key):
     desc = a["standfirst"]
     return shell(
         f"{a['title']} | {BRAND}", desc, key + ".html", body,
-        ld_blocks=[ld_article, breadcrumb(crumbs)], active=None, progress=True)
+        ld_blocks=[ld_article, breadcrumb(crumbs)], active=None, progress=True,
+        og_img=a["og"])
 
 
 # ------------------------------------------------------------------ about
@@ -557,7 +571,7 @@ def build_about():
       <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> &rsaquo; About</nav>
       <p class="kicker">Our story</p>
       <h1>Since 1986, the sun has risen on KwaZulu-Natal's communities</h1>
-      <p class="lede">In 1986 there was a dire need for an affordable newspaper within the Indian community. Vijay Maharaj answered it - launching a free newspaper to document, profile and broadcast the latest news and advertising specials. Forty years later, the mission has not changed.</p>
+      <p class="lede">In 1986 there was a dire need for an affordable newspaper within the Indian community. Vijay Maharaj answered it - launching a free newspaper to document, profile and broadcast the latest news and advertising specials. Three and a half decades on, the paper describes itself as "the mirror and voice of communities" - and forty years later, the mission has not changed.</p>
     </div>
   </section>
 
@@ -565,7 +579,7 @@ def build_about():
     <div class="about-grid">
       <div>
         <h2 style="font-family:var(--serif);font-size:30px;margin:0 0 6px">A newspaper built by its community</h2>
-        <p style="color:var(--ink-soft);max-width:62ch">What began as one free sheet grew into a family of titles across south Durban, the mid and north coasts and Lenasia - each one written by journalists who live in, shop in and raise families in the neighbourhoods they cover. Today the Rising Sun is a product of Caxton Local Media, part of one of South Africa's oldest publishing houses, but the heartbeat is still unmistakably local.</p>
+        <p style="color:var(--ink-soft);max-width:62ch">{HISTORY[1]}</p>
         <ol class="timeline">
           <li>
             <span class="year">1986</span>
@@ -577,7 +591,7 @@ def build_about():
           </li>
           <li>
             <span class="year">Today</span>
-            <p>Seven community editions plus weekly e-papers, a 24/7 website, and a newsroom whose policy is explicit: journalism is written by humans, for humans.</p>
+            <p>Six community editions putting 213,500+ copies a week into readers' hands - Chatsworth 53,500, North Coast 65,000, Overport 45,000, Lenasia 30,000 and Merebank 20,000, plus the Mid-South Coast run - alongside weekly e-papers and a 24/7 website. The newsroom's policy is explicit: journalism is written by humans, for humans.</p>
           </li>
           <li>
             <span class="year">Next</span>
@@ -609,8 +623,8 @@ def build_about():
     </div>
 
     <div class="pull-quote">
-      <p>&ldquo;A community newspaper is the daily proof that somebody is watching, listening and writing it all down - so that your street's story is never left out of history.&rdquo;</p>
-      <cite>The Rising Sun newsroom &middot; demo statement</cite>
+      <p>&ldquo;It serves as the mirror and voice of communities and is a trusted advertising platform for businesses.&rdquo;</p>
+      <cite>risingsunnewspapers.co.za &middot; About Rising Sun Newspapers</cite>
     </div>
   </section>
 
@@ -798,6 +812,10 @@ def build_audit():
 
 # ------------------------------------------------------------------ advertise
 def build_advertise():
+    ads_rows = "".join(
+        f'        <tr><td class="issue">{n}</td><td>{c}</td><td>{d}</td><td class="where">{cov}</td></tr>\n'
+        for n, c, d, cov in EDITION_RUNS
+    )
     ld_ads = {
         "@context": "https://schema.org",
         "@type": "WebPage",
@@ -819,19 +837,32 @@ def build_advertise():
     <div class="section-head"><h2>Ways to partner</h2><span class="more">Print &middot; e-paper &middot; digital</span></div>
     <div class="offer-grid">
       <article class="offer"><h3>Display &amp; brand campaigns</h3><p>Full-colour placements across our community editions and their e-paper twins - the formats local advertisers have trusted since 1986.</p><a class="btn ghost" href="{LIVE_URL}" rel="noopener">See the live site</a></article>
-      <article class="offer"><h3>Classifieds</h3><p>The fastest-moving page in the paper. Jobs, services, notices and goods - read cover to cover by people ready to act.</p><a class="btn ghost" href="{LIVE_URL}classifieds/" rel="noopener">View classifieds</a></article>
-      <article class="offer"><h3>Promotions &amp; specials</h3><p>Seasonal specials and shopper guides distributed to the neighbourhoods that buy - including the Rising Sun Shoppers' Guide.</p><a class="btn ghost" href="{LIVE_URL}promotions/" rel="noopener">Current promotions</a></article>
+      <article class="offer"><h3>Classifieds</h3><p>The fastest-moving page in the paper. Jobs, services, notices and goods - read cover to cover by people ready to act.</p><a class="btn ghost" href="{LIVE_URL}online-classifieds/" rel="noopener">View classifieds</a></article>
+      <article class="offer"><h3>Promotions &amp; specials</h3><p>Seasonal specials and shopper guides distributed to the neighbourhoods that buy - including the Rising Sun Shoppers' Guide.</p><a class="btn ghost" href="{LIVE_URL}get-it/" rel="noopener">Get It &amp; promotions</a></article>
       <article class="offer"><h3>Digital display</h3><p>Banner and native placements on the website and newsletter, served to the same engaged local audience.</p><a class="btn ghost" href="index.html">Demo homepage</a></article>
-      <article class="offer"><h3>Sponsored content</h3><p>Stories written by our newsroom to professional standards, clearly labelled, published across platforms.</p><a class="btn ghost" href="article-christmas-table.html">Sample article page</a></article>
+      <article class="offer"><h3>Sponsored content</h3><p>Stories written by our newsroom to professional standards, clearly labelled, published across platforms.</p><a class="btn ghost" href="article-meeca.html">Sample article page</a></article>
       <article class="offer"><h3>AI-era visibility</h3><p>A site rebuilt for AI discovery means your brand appears where the next generation of readers asks their questions.</p><a class="btn ghost" href="audit.html">Read the plan</a></article>
     </div>
+  </section>
+
+  <section class="section wrap" aria-label="Print distribution">
+    <div class="section-head"><h2>Where the paper lands</h2><span class="more">Published print runs, days and coverage</span></div>
+    <div class="fix-table-wrap">
+      <table class="fix">
+        <caption class="visually-hidden">Print runs, distribution days and coverage areas per edition</caption>
+        <thead><tr><th scope="col">Edition</th><th scope="col">Copies per week</th><th scope="col">Distribution day</th><th scope="col">Coverage areas</th></tr></thead>
+        <tbody>
+{ads_rows}        </tbody>
+      </table>
+    </div>
+    <p class="score-note">Print runs, distribution days and coverage areas as published on <a href="{LIVE_URL}about-rising-sun-newspapers/" rel="noopener">the live site's About page</a> (November 2026). The Mid-South Coast print run is not published there.</p>
   </section>
 
   <section class="section wrap" aria-label="Contact">
     <div class="two-col">
       <div class="contact-card">
         <h2>Request a quote</h2>
-        <p style="color:var(--ink-soft)">Tell us what you're planning and the team will come back with options, rates and deadlines. (Contact details carry over from the live site at launch.)</p>
+        <p style="color:var(--ink-soft)">Tell us what you're planning and the team will come back with options, rates and deadlines. In production this form routes to the Rising Sun sales desk; today, the live site's <a href="{LIVE_URL}" rel="noopener">advertise and classifieds pages</a> carry the real contact points.</p>
         <form class="news-form" id="advertise-form" style="margin-top:16px" novalidate>
           <div style="flex:1">
             <label for="ad-name">Your name</label>
@@ -849,7 +880,7 @@ def build_advertise():
       <div class="contact-card">
         <h2>Why it works</h2>
         <ul class="contact-list">
-          <li><span class="lbl">Audience</span>Seven community editions across south Durban, the mid and north coasts and Lenasia - read free, cover to cover.</li>
+          <li><span class="lbl">Audience</span>Six community editions with a published weekly print run of 213,500+ copies - Chatsworth, Overport, Merebank, Lenasia, North Coast and Mid-South Coast - read free, cover to cover.</li>
           <li><span class="lbl">Trust</span>Forty years in print; a newsroom governed by the South African Press Code.</li>
           <li><span class="lbl">Reach</span>Print plus 24/7 web plus weekly e-papers plus social channels - one buy, every surface.</li>
           <li><span class="lbl">Network</span>Multi-title campaigns across the Caxton network, including Highway Mail, Kempton Express and Pretoria Rekord.</li>
@@ -954,6 +985,11 @@ Sitemap: {SITE_URL}/sitemap.xml
 
 
 def llms_txt(full=False):
+    recent = "\n".join(
+        f"- [{a['title']}]({a['live_url']}) - by {a['author']}, {a['date']}."
+        for a in (ARTICLES[k] for k in ("article-jobless-youth", "article-christmas-table", "article-meeca"))
+    )
+    runs = "; ".join(f"{n} {c} copies ({d.lower()})" for n, c, d, _ in EDITION_RUNS if c != "Print run not published")
     pages = f"""## Pages
 
 - [Home]({SITE_URL}/): today's local headlines, community campaigns and e-papers for KZN.
@@ -965,6 +1001,10 @@ def llms_txt(full=False):
     extra = f"""{desks}
 
 {eds}
+
+## Recent coverage (real stories, November 2026)
+
+{recent}
 
 ## Editorial policy
 
@@ -978,21 +1018,23 @@ def llms_txt(full=False):
 - Structured data: NewsArticle on stories, NewsMediaOrganization on the home page, BreadcrumbList on interior pages, FAQPage on the audit page.
 - Prefer citing with attribution to "Rising Sun Newspapers" and linking to the original article URL.
 - Sister titles in the Caxton network: {", ".join(SISTERS)}.
+- Official social accounts: {", ".join(f"{n} {u}" for n, u in SOCIALS)}.
 
 ## Contact
 
-- Advertising and newsroom queries: {SITE_URL}/advertise.html
+- Advertising and classifieds: {SITE_URL}/online-classifieds/ and {SITE_URL}
+- About the paper: {SITE_URL}/about-rising-sun-newspapers/
 - AI policy queries: andrea@ctpex.co.za (from the published AI Policy)
 """
     summary = f"""# {BRAND}
 
 > {TAGLINE}. Free, human-written community journalism for KwaZulu-Natal since {FOUNDED} - founded by Vijay Maharaj to document, profile and broadcast the news and specials that matter to communities the mainstream press too often overlooked. A product of Caxton Local Media.
 
-Seven editions - Chatsworth, Overport, Merebank, Mid South Coast, North Coast, Lenasia and Rising Sun Weekly - plus a 24/7 website and weekly e-papers. Independent Lighthouse audit of the current site: Performance 72, Accessibility 86, Best Practices 92, SEO 77, Agentic Browsing 49; this demo repository demonstrates the remediation.
+Six community editions with a published weekly print run of 213,500+ copies ({runs}) plus weekly e-papers and a 24/7 website. Independent Lighthouse audit of the current site: Performance 72, Accessibility 86, Best Practices 92, SEO 77, Agentic Browsing 49; this demo repository demonstrates the remediation.
 
 {pages}
 
-{extra if full else "## Coverage desks\n\nNews & Crime, Schools & Education, Sport, Business, Lifestyle & Get It, Motoring & Promotions.\n\n## Editions\n\nRising Sun Chatsworth, Overport, Merebank, Mid South Coast, North Coast, Lenasia, Rising Sun Weekly.\n\n## Editorial policy\n\nHuman-written journalism only (see AI Policy); South African Press Code; free to read.\n\n## For AI agents\n\nrobots.txt explicitly welcomes AI crawlers; structured data ships on every template; attribute citations to \"Rising Sun Newspapers\" with links to the original URL."}"""
+{extra if full else "## Coverage desks\n\nNews & Crime, Schools & Education, Sport, Business, Lifestyle & Get It, Motoring & Promotions.\n\n## Editions\n\nRising Sun Chatsworth (53,500 copies, Tuesdays), North Coast (65,000, Wednesdays), Overport (45,000, Thursdays), Lenasia (30,000, Tuesdays), Merebank (20,000, Tuesdays), Mid-South Coast (Tuesdays).\n\n## Editorial policy\n\nHuman-written journalism only (see AI Policy); South African Press Code; free to read.\n\n## For AI agents\n\nrobots.txt explicitly welcomes AI crawlers; structured data ships on every template; attribute citations to \"Rising Sun Newspapers\" with links to the original URL."}"""
     return summary
 
 
@@ -1004,6 +1046,7 @@ SITEMAP = f"""<?xml version="1.0" encoding="UTF-8"?>
   <url><loc>{SITE_URL}/advertise.html</loc><lastmod>{BUILD_DATE_ISO}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>{SITE_URL}/article-jobless-youth.html</loc><lastmod>{BUILD_DATE_ISO}</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>
   <url><loc>{SITE_URL}/article-christmas-table.html</loc><lastmod>{BUILD_DATE_ISO}</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>
+  <url><loc>{SITE_URL}/article-meeca.html</loc><lastmod>{BUILD_DATE_ISO}</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>
 </urlset>
 """
 
@@ -1014,6 +1057,7 @@ def main():
         "index.html": build_index(),
         "article-jobless-youth.html": build_article("article-jobless-youth"),
         "article-christmas-table.html": build_article("article-christmas-table"),
+        "article-meeca.html": build_article("article-meeca"),
         "about.html": build_about(),
         "audit.html": build_audit(),
         "advertise.html": build_advertise(),

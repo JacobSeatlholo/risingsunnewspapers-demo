@@ -569,3 +569,15 @@ table.fix tr:nth-child(even) td { background: var(--paper); }
   .topbar, .ticker, .site-header, .site-footer, .share-row, .newsletter, .nav-toggle { display: none !important; }
   body { background: #fff; color: #000; }
 }
+
+/* ---------------- Real masthead logo (the paper's own 230x110 header file) ---------------- */
+.brand-logo { height: 62px; width: auto; display: block; mix-blend-mode: multiply; }
+.footer-social { margin-top: 8px; }
+.footer-social .dot { color: var(--footer-soft); margin: 0 4px; }
+.footer-social a { color: var(--footer-soft); }
+.footer-social a:hover, .footer-social a:focus { color: var(--white); }
+.also-read a { color: var(--brand-deep); text-decoration: underline; }
+@media (max-width: 720px) {
+  .brand-logo { height: 42px; }
+  .footer-social .dot { display: none; }
+}

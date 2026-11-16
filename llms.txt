@@ -2,7 +2,7 @@
 
 > Breaking local news in KZN. Free, human-written community journalism for KwaZulu-Natal since 1986 - founded by Vijay Maharaj to document, profile and broadcast the news and specials that matter to communities the mainstream press too often overlooked. A product of Caxton Local Media.
 
-Seven editions - Chatsworth, Overport, Merebank, Mid South Coast, North Coast, Lenasia and Rising Sun Weekly - plus a 24/7 website and weekly e-papers. Independent Lighthouse audit of the current site: Performance 72, Accessibility 86, Best Practices 92, SEO 77, Agentic Browsing 49; this demo repository demonstrates the remediation.
+Six community editions with a published weekly print run of 213,500+ copies (Rising Sun Chatsworth 53,500 copies (tuesdays); North Coast Rising Sun 65,000 copies (wednesdays); Rising Sun Overport 45,000 copies (thursdays); Rising Sun Lenasia 30,000 copies (tuesdays); Rising Sun Merebank 20,000 copies (tuesdays)) plus weekly e-papers and a 24/7 website. Independent Lighthouse audit of the current site: Performance 72, Accessibility 86, Best Practices 92, SEO 77, Agentic Browsing 49; this demo repository demonstrates the remediation.
 
 ## Pages
 
@@ -17,7 +17,7 @@ News & Crime, Schools & Education, Sport, Business, Lifestyle & Get It, Motoring
 
 ## Editions
 
-Rising Sun Chatsworth, Overport, Merebank, Mid South Coast, North Coast, Lenasia, Rising Sun Weekly.
+Rising Sun Chatsworth (53,500 copies, Tuesdays), North Coast (65,000, Wednesdays), Overport (45,000, Thursdays), Lenasia (30,000, Tuesdays), Merebank (20,000, Tuesdays), Mid-South Coast (Tuesdays).
 
 ## Editorial policy
 

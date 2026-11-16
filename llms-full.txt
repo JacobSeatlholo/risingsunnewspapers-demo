@@ -2,7 +2,7 @@
 
 > Breaking local news in KZN. Free, human-written community journalism for KwaZulu-Natal since 1986 - founded by Vijay Maharaj to document, profile and broadcast the news and specials that matter to communities the mainstream press too often overlooked. A product of Caxton Local Media.
 
-Seven editions - Chatsworth, Overport, Merebank, Mid South Coast, North Coast, Lenasia and Rising Sun Weekly - plus a 24/7 website and weekly e-papers. Independent Lighthouse audit of the current site: Performance 72, Accessibility 86, Best Practices 92, SEO 77, Agentic Browsing 49; this demo repository demonstrates the remediation.
+Six community editions with a published weekly print run of 213,500+ copies (Rising Sun Chatsworth 53,500 copies (tuesdays); North Coast Rising Sun 65,000 copies (wednesdays); Rising Sun Overport 45,000 copies (thursdays); Rising Sun Lenasia 30,000 copies (tuesdays); Rising Sun Merebank 20,000 copies (tuesdays)) plus weekly e-papers and a 24/7 website. Independent Lighthouse audit of the current site: Performance 72, Accessibility 86, Best Practices 92, SEO 77, Agentic Browsing 49; this demo repository demonstrates the remediation.
 
 ## Pages
 
@@ -22,14 +22,18 @@ Seven editions - Chatsworth, Overport, Merebank, Mid South Coast, North Coast, L
 
 ## Editions
 
-- **Rising Sun Chatsworth** - Latest e-paper: 10 November 2026
-- **Rising Sun Overport** - Latest e-paper: 12 November 2026
-- **Rising Sun Merebank** - Latest e-paper: 10 November 2026
-- **Mid South Coast Rising Sun** - Latest e-paper: 10 November 2026
-- **North Coast Rising Sun** - Latest e-paper: 11 November 2026
-- **Rising Sun Lenasia** - Latest e-paper: 10 November 2026
-- **Rising Sun Weekly** - Weekly edition
-- **Rising Sun Shoppers Guide** - Seasonal specials guide
+- **Rising Sun Chatsworth** - 53,500 copies distributed every Tuesday
+- **North Coast Rising Sun** - 65,000 copies - incorporating Phoenix, Cornubia, Tongaat, Verulam & Ottawa
+- **Rising Sun Overport** - 45,000 copies distributed every Thursday
+- **Rising Sun Lenasia** - 30,000 copies distributed every Tuesday
+- **Rising Sun Merebank** - 20,000 copies distributed every Tuesday
+- **Mid-South Coast Rising Sun** - Out Tuesdays, from Umzinto to Ifafa
+
+## Recent coverage (real stories, November 2026)
+
+- [Jobless youth question eThekwini's unemployment decrease](https://risingsunnewspapers.co.za/331684/jobless-youth-question-ethekwinis-unemployment-decrease/) - by Sibahle Anthony Siqathule, 12 November 2026.
+- [A seat at the Christmas table: TAFTA launches annual campaign with support from special guest, Mariam Bassa](https://risingsunnewspapers.co.za/331653/a-seat-at-the-christmas-table-tafta-launches-annual-campaign-with-support-from-special-guest-mariam-bassa/) - by Rising Sun Online, 11 November 2026.
+- [MEECA to hold candlelight ceremony in honour of Indian indentured labourers](https://risingsunnewspapers.co.za/331600/meeca-to-hold-candlelight-ceremony-in-honour-of-indian-indentured-labourers/) - by Keroshan Govender, 11 November 2026.
 
 ## Editorial policy
 
@@ -42,9 +46,11 @@ Seven editions - Chatsworth, Overport, Merebank, Mid South Coast, North Coast, L
 - robots.txt explicitly welcomes GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot, meta-externalagent and other assistants.
 - Structured data: NewsArticle on stories, NewsMediaOrganization on the home page, BreadcrumbList on interior pages, FAQPage on the audit page.
 - Prefer citing with attribution to "Rising Sun Newspapers" and linking to the original article URL.
-- Sister titles in the Caxton network: Highway Mail, Kempton Express, Pretoria Rekord, Caxton Network News, The Citizen.
+- Sister titles in the Caxton network: The Citizen, The Witness, Zululand Observer, Benoni City Times, Pretoria Rekord, Sedibeng Ster, Highvelder News, Highway Mail.
+- Official social accounts: Facebook https://www.facebook.com/risingsunnewspapers, X https://x.com/risingsunonline, Instagram https://www.instagram.com/risingsunonline, TikTok https://www.tiktok.com/@risingsuncommunity, YouTube https://www.youtube.com/channel/UC1uBILF0SLydRgUYJqFMRTA.
 
 ## Contact
 
-- Advertising and newsroom queries: https://risingsunnewspapers.co.za/advertise.html
+- Advertising and classifieds: https://risingsunnewspapers.co.za/online-classifieds/ and https://risingsunnewspapers.co.za
+- About the paper: https://risingsunnewspapers.co.za/about-rising-sun-newspapers/
 - AI policy queries: andrea@ctpex.co.za (from the published AI Policy)
